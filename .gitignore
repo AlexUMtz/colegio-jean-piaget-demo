@@ -1,0 +1,28 @@
+# Dependencias: se reinstalan con "npm install", no deben subirse nunca.
+node_modules/
+
+# Resultado de "npm run build": se genera automáticamente, no es código
+# fuente, y cada plataforma de hosting lo crea por su cuenta.
+dist/
+
+# Caché interna de Astro, se regenera sola en cada build.
+.astro/
+
+# Variables de entorno: aquí es donde más adelante guardarías claves
+# reales (como la de Web3Forms) si decides no dejarlas directo en el
+# código. Nunca deben subirse a un repositorio público.
+.env
+.env.production
+
+# Configuración local que crea la CLI de Vercel al conectar el proyecto.
+.vercel/
+
+# Archivos que generan distintos sistemas operativos y editores,
+# irrelevantes para el proyecto y distintos para cada persona.
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Registros de errores de npm, si algo falla durante una instalación.
+npm-debug.log*
