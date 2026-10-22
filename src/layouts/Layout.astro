@@ -1,0 +1,100 @@
+---
+// Layout base: el "molde" que envuelve cada página del sitio.
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BotonWhatsApp from '../components/BotonWhatsapp.astro';
+interface Props {
+  titulo: string;
+  descripcion?: string;
+}
+
+const {
+  titulo,
+  descripcion = 'Colegio Jean Piaget, educación de preescolar y primaria.',
+} = Astro.props;
+
+// URL canónica de esta página: le dice a los buscadores cuál es la
+// versión "oficial" de cada URL, evitando problemas de contenido
+// duplicado si el sitio llegara a ser accesible por más de una ruta.
+const urlCanonica = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang='es'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta name='description' content={descripcion} />
+    <link rel='canonical' href={urlCanonica} />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Nunito+Sans:wght@400;600&display=swap'
+      rel='stylesheet'
+    />
+
+    <title>{titulo} · Colegio Jean Piaget</title>
+
+    <!-- Open Graph: controla cómo se ve el enlace al compartirlo en
+         WhatsApp, Facebook, etc. Sin esto, se comparte como texto pelón. -->
+    <meta property='og:title' content={`${titulo} · Colegio Jean Piaget`} />
+    <meta property='og:description' content={descripcion} />
+    <meta property='og:type' content='website' />
+    <meta property='og:url' content={urlCanonica} />
+    <meta property='og:locale' content='es_MX' />
+  </head>
+  <body>
+    <a
+      href='#contenido'
+      class='sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-azul-marca focus:text-white focus:px-4 focus:py-2 focus:rounded-lg'
+    >
+      Saltar al contenido
+    </a>
+    <Header />
+    <main id='contenido'>
+      <slot />
+    </main>
+    <Footer />
+    <BotonWhatsApp />
+    <noscript>
+      <style>
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
+
+    <script>
+      // Detecta cuándo cada elemento ".reveal" entra en pantalla y le
+      // agrega "reveal-visible" (la clase que lo hace aparecer, definida
+      // en global.css). Respeta la preferencia de movimiento reducido:
+      // si está activada, no hace nada y el CSS ya los muestra de golpe.
+      const prefiereMenosMovimiento = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches;
+
+      if (!prefiereMenosMovimiento) {
+        const observador = new IntersectionObserver(
+          (elementos) => {
+            elementos.forEach((elemento) => {
+              if (elemento.isIntersecting) {
+                elemento.target.classList.add('reveal-visible');
+                // Se anima una sola vez: dejamos de observarlo tras aparecer.
+                observador.unobserve(elemento.target);
+              }
+            });
+          },
+          { threshold: 0.15 },
+        );
+
+        document.querySelectorAll('.reveal').forEach((elemento) => {
+          observador.observe(elemento);
+        });
+      }
+    </script>
+  </body>
+</html>

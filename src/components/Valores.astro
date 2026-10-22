@@ -1,0 +1,51 @@
+---
+const valores = [
+  {
+    titulo: 'Respeto',
+    texto:
+      'Tratamos a cada alumno, familia y colaborador con dignidad y empatía.',
+  },
+  {
+    titulo: 'Responsabilidad',
+    texto: 'Cumplimos lo que prometemos, dentro y fuera del salón de clases.',
+  },
+  {
+    titulo: 'Colaboración',
+    texto:
+      'Creemos que la educación se construye entre familia, docentes y alumnos.',
+  },
+  {
+    titulo: 'Superación',
+    texto:
+      'Impulsamos a cada alumno a dar su mejor esfuerzo y seguir creciendo.',
+  },
+];
+---
+
+<section class='bg-white py-20'>
+  <div class='max-w-3xl mx-auto px-6'>
+    <p
+      class='text-xs font-titulo font-bold tracking-widest text-azul-500 uppercase mb-2'
+    >
+      Lo que nos define
+    </p>
+    <h2 class='text-3xl md:text-4xl mb-8'>Nuestros valores</h2>
+
+    {
+      valores.map((valor, indice) => (
+        <div
+          class='reveal flex flex-col md:flex-row gap-3 md:gap-10 py-8 border-b border-linea last:border-b-0'
+          style={`transition-delay: ${indice * 100}ms`}
+        >
+          <p class='font-titulo font-extrabold text-4xl text-amarillo-marca md:w-20 shrink-0'>
+            {String(indice + 1).padStart(2, '0')}
+          </p>
+          <div>
+            <h3 class='text-xl mb-2'>{valor.titulo}</h3>
+            <p class='font-cuerpo text-grisTexto'>{valor.texto}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

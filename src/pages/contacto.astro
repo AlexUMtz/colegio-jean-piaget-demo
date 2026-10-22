@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EncabezadoPagina from '../components/EncabezadoPagina.astro';
+---
+
+<Layout titulo='Contacto'>
+  <EncabezadoPagina
+    titulo='Contacto'
+    subtitulo='Escríbenos y resolvemos tus dudas a la brevedad.'
+    fondoOscuro={true}
+  />
+
+  <section class='bg-white py-20'>
+    <div class='max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12'>
+      <div>
+        <h2 class='text-2xl mb-6'>Información de contacto</h2>
+
+        <dl class='space-y-4 mb-8'>
+          <div>
+            <dt class='font-titulo font-bold text-sm text-azul-marca'>
+              Dirección
+            </dt>
+            <dd class='font-cuerpo text-grisTexto'>
+              [EJEMPLO] Calle Ejemplo 123, Ecatepec de Morelos, Edo. Méx.
+            </dd>
+          </div>
+          <div>
+            <dt class='font-titulo font-bold text-sm text-azul-marca'>
+              Teléfono
+            </dt>
+            <dd class='font-cuerpo text-grisTexto'>[EJEMPLO] 55 0000 0000</dd>
+          </div>
+          <div>
+            <dt class='font-titulo font-bold text-sm text-azul-marca'>
+              Correo
+            </dt>
+            <dd class='font-cuerpo text-grisTexto'>
+              [EJEMPLO] contacto@jeanpiaget.edu.mx
+            </dd>
+          </div>
+          <div>
+            <dt class='font-titulo font-bold text-sm text-azul-marca'>
+              Horario de atención
+            </dt>
+            <dd class='font-cuerpo text-grisTexto'>
+              [EJEMPLO] Lunes a viernes, 7:00 a 15:00 hrs
+            </dd>
+          </div>
+        </dl>
+
+        <div class='rounded-lg overflow-hidden h-72'>
+          <iframe
+            class='w-full h-full border-0|'
+            src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15039.634621365143!2d-99.05206918716432!3d19.545534825041145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f012bc017d73%3A0xac20562255a213!2sColegio%20Jean%20Piaget!5e0!3m2!1ses-419!2smx!4v1791414750179!5m2!1ses-419!2smx'
+            allowfullscreen=''
+            loading='lazy'
+            referrerpolicy='strict-origin-when-cross-origin'></iframe>
+        </div>
+      </div>
+
+      <div>
+        <h2 class='text-2xl mb-6'>Envíanos un mensaje</h2>
+
+        <form
+          action='https://api.web3forms.com/submit'
+          method='POST'
+          class='space-y-4'
+        >
+          <input
+            type='hidden'
+            name='access_key'
+            value='[EJEMPLO-REEMPLAZAR-CON-TU-CLAVE-DE-WEB3FORMS]'
+          />
+          <input
+            type='hidden'
+            name='subject'
+            value='Nuevo mensaje desde el sitio del Colegio Jean Piaget'
+          />
+
+          <div>
+            <label
+              for='nombre'
+              class='block font-cuerpo text-sm font-bold text-tinta mb-1'
+              >Nombre</label
+            >
+            <input
+              type='text'
+              id='nombre'
+              name='nombre'
+              required
+              class='w-full border border-linea rounded-lg px-4 py-2 font-cuerpo focus:outline-none focus:ring-2 focus:ring-azul-marca'
+            />
+          </div>
+
+          <div>
+            <label
+              for='correo'
+              class='block font-cuerpo text-sm font-bold text-tinta mb-1'
+              >Correo</label
+            >
+            <input
+              type='email'
+              id='correo'
+              name='correo'
+              required
+              class='w-full border border-linea rounded-lg px-4 py-2 font-cuerpo focus:outline-none focus:ring-2 focus:ring-azul-marca'
+            />
+          </div>
+
+          <div>
+            <label
+              for='telefono'
+              class='block font-cuerpo text-sm font-bold text-tinta mb-1'
+              >Teléfono (opcional)</label
+            >
+            <input
+              type='tel'
+              id='telefono'
+              name='telefono'
+              class='w-full border border-linea rounded-lg px-4 py-2 font-cuerpo focus:outline-none focus:ring-2 focus:ring-azul-marca'
+            />
+          </div>
+
+          <div>
+            <label
+              for='mensaje'
+              class='block font-cuerpo text-sm font-bold text-tinta mb-1'
+              >Mensaje</label
+            >
+            <textarea
+              id='mensaje'
+              name='mensaje'
+              rows='4'
+              required
+              class='w-full border border-linea rounded-lg px-4 py-2 font-cuerpo focus:outline-none focus:ring-2 focus:ring-azul-marca'
+            ></textarea>
+          </div>
+
+          <button
+            type='submit'
+            class='w-full bg-amarillo-marca hover:bg-amarillo-hover text-azul-900 font-titulo font-bold px-8 py-3 rounded-full transition-colors duration-300'
+          >
+            Enviar mensaje
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>

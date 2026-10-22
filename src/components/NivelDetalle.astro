@@ -1,0 +1,106 @@
+---
+import { Image } from 'astro:assets';
+
+// Bloque detallado de un nivel educativo (Preescolar o Primaria).
+// Reutilizable vía props. Incluye una ficha de datos concretos (horario,
+// materias/talleres) que NO se repite en las tarjetas de Inicio, para
+// que esta página aporte información nueva y justifique el clic.
+interface Props {
+  id: string;
+  etiqueta: string;
+  titulo: string;
+  descripcion: string;
+  destacados: string[];
+  datos: { etiqueta: string; valor: string }[];
+  imagen: ImageMetadata;
+  fotoIzquierda?: boolean;
+  fondo?: 'bg-white' | 'bg-azul-50';
+}
+
+const {
+  id,
+  etiqueta,
+  titulo,
+  descripcion,
+  destacados,
+  datos,
+  imagen,
+  fotoIzquierda = false,
+  fondo = 'bg-white',
+} = Astro.props;
+---
+
+<section id={id} class:list={[fondo, 'py-20 scroll-mt-20']}>
+  <div
+    class='max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-10 md:gap-16 items-center'
+  >
+    <div
+      class:list={[
+        fotoIzquierda ? 'order-1' : 'order-1 md:order-2',
+        'reveal rounded-lg overflow-hidden h-64 md:h-full self-stretch',
+      ]}
+      style='transition-delay: 150ms'
+    >
+      <Image
+        src={imagen}
+        alt={`${etiqueta} en el Colegio Jean Piaget`}
+        class='w-full h-full object-cover'
+      />
+    </div>
+
+    <div
+      class:list={[fotoIzquierda ? 'order-2' : 'order-2 md:order-1', 'reveal']}
+    >
+      <p
+        class='text-xs font-titulo font-bold tracking-widest text-azul-500 uppercase mb-2'
+      >
+        {etiqueta}
+      </p>
+      <h2 class='text-3xl md:text-4xl mb-4'>{titulo}</h2>
+      <p class='font-cuerpo text-grisTexto leading-relaxed mb-6'>
+        {descripcion}
+      </p>
+
+      <ul class='space-y-2 mb-6'>
+        {
+          destacados.map((punto) => (
+            <li class='flex items-center gap-3 text-tinta font-cuerpo'>
+              <svg
+                class='w-5 h-5 text-amarillo-marca shrink-0'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                stroke-width='2.5'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+              >
+                <path d='M20 6L9 17l-5-5' />
+              </svg>
+              {punto}
+            </li>
+          ))
+        }
+      </ul>
+
+      <dl class='border-t border-linea mb-8'>
+        {
+          datos.map((dato) => (
+            <div class='flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 py-3 border-b border-linea'>
+              <dt class='font-titulo font-bold text-sm text-azul-marca sm:w-40 shrink-0'>
+                {dato.etiqueta}
+              </dt>
+              <dd class='font-cuerpo text-grisTexto text-sm'>{dato.valor}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <a
+        href='/contacto'
+        class='inline-block bg-azul-marca hover:bg-azul-500 text-white font-titulo font-bold px-8 py-3 rounded-full transition-colors duration-300'
+      >
+        Solicitar informes
+      </a>
+    </div>
+  </div>
+</section>

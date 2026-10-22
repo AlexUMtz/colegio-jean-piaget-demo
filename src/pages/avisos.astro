@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import EncabezadoPagina from '../components/EncabezadoPagina.astro';
+import encabezadoFoto from '../assets/images/encabezado-avisos.jpg';
+
+// Lee TODOS los archivos de src/content/avisos/, ya validados contra
+// el molde de config.ts. Cada "entrada" trae sus datos (entry.data) y
+// un método para renderizar su contenido Markdown (entry.render()).
+const avisos = await getCollection('avisos');
+
+// Ordena del más reciente al más antiguo. getTime() convierte cada
+// fecha a un número (milisegundos), y restamos b menos a para que el
+// orden quede descendente (el más grande, o sea el más reciente, primero).
+const avisosOrdenados = avisos.sort(
+  (a, b) => b.data.fecha.getTime() - a.data.fecha.getTime(),
+);
+
+// Para cada aviso, generamos su contenido renderizado (el texto Markdown
+// convertido a HTML) ANTES de llegar al template, porque render() es
+// una función asíncrona y el template no puede usar "await" directamente.
+const avisosConContenido = await Promise.all(
+  avisosOrdenados.map(async (aviso) => {
+    const { Content } = await aviso.render();
+    return { datos: aviso.data, Content };
+  }),
+);
+
+// Estilo visual por tipo de aviso, según la paleta definida desde la
+// Etapa 1: Suspensión en rojo, Circular en azul claro, Evento en amarillo.
+const estilos = {
+  suspension: { etiqueta: 'Suspensión', clase: 'bg-suspension text-white' },
+  circular: { etiqueta: 'Circular', clase: 'bg-azul-50 text-azul-marca' },
+  evento: { etiqueta: 'Evento', clase: 'bg-amarillo-marca text-azul-900' },
+};
+
+const formatoFecha = (fecha: Date) =>
+  fecha.toLocaleDateString('es-MX', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+---
+
+<Layout titulo='Avisos'>
+  <EncabezadoPagina
+    titulo='Avisos'
+    subtitulo='Circulares, eventos y suspensiones de clases del Colegio Jean Piaget.'
+    variante='foto'
+    imagen={encabezadoFoto}
+  />
+
+  <section class='bg-white py-20'>
+    <div class='max-w-3xl mx-auto px-6 space-y-8'>
+      {
+        avisosConContenido.map(({ datos, Content }) => (
+          <article class='border-b border-linea pb-8 last:border-b-0'>
+            <div class='flex items-center gap-3 mb-3'>
+              <span
+                class:list={[
+                  'text-xs font-titulo font-bold px-3 py-1 rounded-full',
+                  estilos[datos.tipo].clase,
+                ]}
+              >
+                {estilos[datos.tipo].etiqueta}
+              </span>
+              <span class='text-grisTexto text-sm font-cuerpo'>
+                {formatoFecha(datos.fecha)}
+              </span>
+            </div>
+            <h2 class='text-xl mb-2'>{datos.titulo}</h2>
+            <div class='font-cuerpo text-grisTexto prose-sm'>
+              <Content />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

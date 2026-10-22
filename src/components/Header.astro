@@ -1,0 +1,120 @@
+---
+// Header: barra de contacto + encabezado fijo con navegación.
+const enlaces = [
+  { href: '/', texto: 'Inicio' },
+  { href: '/quienes-somos', texto: '¿Quiénes somos?' },
+  { href: '/oferta-educativa', texto: 'Oferta educativa' },
+  { href: '/avisos', texto: 'Avisos' },
+  { href: '/contacto', texto: 'Contacto' },
+];
+
+const rutaActual = Astro.url.pathname;
+---
+
+<div class='hidden md:block bg-azul-900 text-white text-sm'>
+  <div class='max-w-6xl mx-auto px-6 py-2 flex justify-end gap-6'>
+    <span>Tel. 55 0000 0000</span>
+    <span>Lun-Vie 7:00-15:00</span>
+    <span>contacto@jeanpiaget.edu.mx</span>
+  </div>
+</div>
+
+<header id='encabezado' class='sticky top-0 z-50 bg-white transition-shadow'>
+  <div class='max-w-6xl mx-auto px-6 h-20 flex items-center justify-between'>
+    <a href='/' class='font-titulo font-extrabold text-xl text-azul-marca'>
+      Colegio Jean Piaget
+    </a>
+
+    <nav class='hidden md:flex items-center gap-8'>
+      {
+        enlaces.map((enlace) => (
+          <a
+            href={enlace.href}
+            class:list={[
+              'font-cuerpo font-semibold text-tinta hover:text-azul-marca transition-colors pb-1 border-b-2',
+              rutaActual === enlace.href
+                ? 'border-amarillo-marca'
+                : 'border-transparent',
+            ]}
+          >
+            {enlace.texto}
+          </a>
+        ))
+      }
+      <a
+        href='/contacto'
+        class='bg-amarillo-marca hover:bg-amarillo-hover text-azul-900 font-titulo font-bold px-5 py-2 rounded-full transition-colors'
+      >
+        Agenda una visita
+      </a>
+    </nav>
+
+    <button
+      id='boton-menu'
+      class='md:hidden text-azul-marca'
+      aria-label='Abrir menú'
+      aria-expanded='false'
+      aria-controls='menu-movil'
+    >
+      <svg
+        width='28'
+        height='28'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        stroke-width='2'
+      >
+        <path d='M4 6h16M4 12h16M4 18h16' stroke-linecap='round'></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div
+  id='menu-movil'
+  class='fixed inset-0 z-40 bg-white flex flex-col items-center justify-center gap-8 md:hidden
+         transform translate-x-full transition-transform duration-300 ease-in-out motion-reduce:transition-none
+         pointer-events-none'
+  aria-hidden='true'
+>
+  {
+    enlaces.map((enlace) => (
+      <a
+        href={enlace.href}
+        class='font-titulo text-2xl font-bold text-azul-marca'
+      >
+        {enlace.texto}
+      </a>
+    ))
+  }
+  <a
+    href='/contacto'
+    class='bg-amarillo-marca text-azul-900 font-titulo font-bold
+  px-6 py-3 rounded-full'
+  >
+    Agenda una visita
+  </a>
+
+  <script>
+    const botonMenu = document.getElementById('boton-menu');
+    const menuMovil = document.getElementById('menu-movil');
+
+    function alternarMenu() {
+      const seVaAAbrir = menuMovil?.classList.contains('translate-x-full');
+
+      menuMovil?.classList.toggle('translate-x-full', !seVaAAbrir);
+      menuMovil?.classList.toggle('translate-x-0', seVaAAbrir);
+      menuMovil?.classList.toggle('pointer-events-none', !seVaAAbrir);
+
+      botonMenu?.setAttribute('aria-expanded', String(seVaAAbrir));
+      menuMovil?.setAttribute('aria-hidden', String(!seVaAAbrir));
+    }
+
+    botonMenu?.addEventListener('click', alternarMenu);
+
+    const encabezado = document.getElementById('encabezado');
+    window.addEventListener('scroll', () => {
+      encabezado?.classList.toggle('shadow-md', window.scrollY > 8);
+    });
+  </script>
+</div>

@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import imgGrande from '../assets/images/instalaciones-grande.jpg';
+import imgChico1 from '../assets/images/instalaciones-chico-1.jpg';
+import imgChico2 from '../assets/images/instalaciones-chico-2.jpg';
+import imgAncho from '../assets/images/instalaciones-ancho.jpg';
+
+// Instalaciones: mosaico de fotos de distinto tamaño (estilo bento).
+// En móvil se simplifica a una cuadrícula uniforme de 2 columnas;
+// el mosaico con tamaños distintos solo aplica a partir de md.
+// Fotos [EJEMPLO] hasta tener las reales.
+const espacios = [
+  { nombre: 'Salones', tamano: 'grande', imagen: imgGrande },
+  { nombre: 'Salon de cómputo', tamano: 'chico', imagen: imgChico1 },
+  { nombre: 'Biblioteca', tamano: 'chico', imagen: imgChico2 },
+  { nombre: 'Patio de juegos', tamano: 'ancho', imagen: imgAncho },
+];
+
+// Clases de tamaño solo activas en escritorio (md:); en móvil todos
+// los espacios ocupan una celda igual, dentro de una grid de 2 columnas.
+const clasesPorTamano = {
+  grande: 'md:col-span-2 md:row-span-2',
+  chico: 'md:col-span-1 md:row-span-1',
+  ancho: 'md:col-span-2 md:row-span-1',
+};
+---
+
+<section class='bg-azul-50 py-20'>
+  <div class='max-w-5xl mx-auto px-6'>
+    <p
+      class='text-xs font-titulo font-bold tracking-widest text-azul-500 uppercase mb-2 text-center'
+    >
+      Conócenos
+    </p>
+    <h2 class='text-3xl md:text-4xl text-center mb-4'>
+      Nuestras instalaciones
+    </h2>
+    <p class='font-cuerpo text-grisTexto text-center max-w-xl mx-auto mb-12'>
+      Espacios pensados para el aprendizaje, el juego y la convivencia diaria.
+    </p>
+
+    <div
+      class='grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 md:h-[480px]'
+    >
+      {
+        espacios.map((espacio, indice) => (
+          <div
+            class:list={[
+              'reveal group relative rounded-lg overflow-hidden bg-azul-200 h-40 md:h-auto shadow-sm hover:shadow-lg transition-shadow duration-500 ease-out',
+              clasesPorTamano[espacio.tamano],
+            ]}
+            style={`transition-delay: ${indice * 100}ms`}
+          >
+            <Image
+              src={espacio.imagen}
+              alt={espacio.nombre}
+              class='absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105'
+            />
+            <span class='absolute bottom-3 left-1/2 -translate-x-1/2 md:left-3 md:translate-x-0 bg-white/90 text-azul-marca text-xs font-titulo font-bold px-3 py-1 rounded-full'>
+              {espacio.nombre}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

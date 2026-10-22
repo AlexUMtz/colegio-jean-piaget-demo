@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+
+// Encabezado reutilizable para páginas internas. Dos variantes:
+// - "simple": fondo azul claro, título y subtítulo centrados (Contacto,
+//   Aviso de privacidad: páginas más directas, sin necesidad de ambientar).
+// - "foto": imagen de fondo + tarjeta flotante azul oscuro que se
+//   sobrepone entre la foto y el espacio en blanco siguiente (mismo
+//   recurso que la Banda CTA de Inicio, sin curva ni botones: eso queda
+//   como sello exclusivo del Hero de portada).
+interface Props {
+  titulo: string;
+  subtitulo?: string;
+  variante?: 'simple' | 'foto';
+  imagen?: ImageMetadata;
+  fondoOscuro?: boolean
+}
+
+const { titulo, subtitulo, variante = 'simple', imagen, fondoOscuro = false } = Astro.props;
+---
+
+{
+  variante === 'foto' ? (
+    <div class="h-72 md:h-96">
+  <Image
+    src={imagen!}
+    alt={titulo}
+    class="w-full h-full object-cover"
+    loading="eager"
+    fetchpriority="high"
+  />
+</div>
+
+      <section class='relative bg-white pt-20 md:pt-24 pb-16 md:pb-20'>
+        <div class='max-w-3xl mx-auto px-6'>
+          <div class='relative -mt-16 md:-mt-44 bg-azul-900 rounded-2xl shadow-xl px-8 py-10 md:px-14 md:py-12 text-center'>
+            <h1 class='text-white text-3xl md:text-4xl mb-2'>{titulo}</h1>
+            {subtitulo && <p class='font-cuerpo text-azul-200'>{subtitulo}</p>}
+          </div>
+        </div>
+      </section>
+    </div>
+  ) : (
+     <section class:list={[fondoOscuro ? 'bg-azul-900' : 'bg-azul-50', 'py-16 md:py-20']}>
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h1 class:list={[fondoOscuro ? 'text-white' : '', 'text-4xl md:text-5xl mb-3']}>{titulo}</h1>
+      {subtitulo && (
+        <p class:list={[fondoOscuro ? 'text-azul-200' : 'text-grisTexto', 'font-cuerpo text-lg']}>{subtitulo}</p>
+      )}
+    </div>
+  </section>
+  )
+}

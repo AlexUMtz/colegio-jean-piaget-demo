@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EncabezadoPagina from '../components/EncabezadoPagina.astro';
+import NivelDetalle from '../components/NivelDetalle.astro';
+import ComoIngresar from '../components/ComoIngresar.astro';
+import imgPreescolar from '../assets/images/oferta-preescolar.jpg';
+import imgPrimaria from '../assets/images/oferta-primaria.jpg';
+import encabezadoFoto from '../assets/images/encabezado-oferta.jpg';
+---
+
+<Layout titulo='Oferta educativa'>
+  <EncabezadoPagina
+    titulo='Oferta educativa'
+    subtitulo='Un programa pensado para cada etapa, de preescolar a 6° de primaria.'
+    variante='foto'
+    imagen={encabezadoFoto}
+  />
+
+  <NivelDetalle
+    id='preescolar'
+    etiqueta='Preescolar'
+    titulo='Un comienzo con bases sólidas'
+    descripcion='En preescolar acompañamos los primeros pasos de cada niño con un método que combina juego, exploración y estructura, sentando las bases para el aprendizaje que vendrá.'
+    destacados={[
+      'Grupos reducidos',
+      'Estimulación temprana',
+      'Desarrollo socioemocional',
+    ]}
+    datos={[
+      { etiqueta: 'Horario', valor: '8:00 a 13:00 hrs' },
+      {
+        etiqueta: 'Actividades',
+        valor: 'Música, educación física, talleres de expresión artística',
+      },
+    ]}
+    imagen={imgPreescolar}
+    fondo='bg-white'
+  />
+
+  <NivelDetalle
+    id='primaria'
+    etiqueta='Primaria'
+    titulo='De 1° a 6°, formando a cada alumno'
+    descripcion='En primaria fortalecemos el conocimiento académico con un enfoque práctico, acompañando a cada alumno de forma cercana a lo largo de los seis grados.'
+    destacados={[
+      'Segundo idioma',
+      'Aprendizaje por proyectos',
+      'Tutorías personalizadas',
+    ]}
+    datos={[
+      { etiqueta: 'Horario', valor: '8:00 a 14:00 hrs' },
+      {
+        etiqueta: 'Materias',
+        valor: 'Español, Matemáticas, Inglés, Educación física',
+      },
+      {
+        etiqueta: 'Talleres y clases adicionales',
+        valor: 'Jazz y danza',
+      },
+    ]}
+    imagen={imgPrimaria}
+    fotoIzquierda={true}
+    fondo='bg-azul-50'
+  />
+
+  <ComoIngresar />
+</Layout>

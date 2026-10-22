@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import historiaFoto from '../assets/images/historia-foto.jpg';
+
+// Introducción breve a la historia del colegio, con enlace a la
+// versión completa en ¿Quiénes somos?. Contenido neutral, sin atribuir
+// una intención específica al nombre del colegio.
+---
+
+<section class='bg-white py-20'>
+  <div
+    class='max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-10 md:gap-16 items-center'
+    style='transition-delay: 150ms'
+  >
+    <div
+      class='reveal order-2 md:order-1 rounded-lg overflow-hidden h-64 md:h-80'
+      style='transition-delay: 150ms'
+    >
+      <Image
+        src={historiaFoto}
+        alt='Instalaciones del Colegio Jean Piaget'
+        class='w-full h-full object-cover'
+      />
+    </div>
+
+    <div class='reveal order-1 md:order-2'>
+      <p
+        class='text-xs font-titulo font-bold tracking-widest text-azul-500 uppercase mb-2'
+      >
+        Nuestra historia
+      </p>
+      <h2 class='text-3xl md:text-4xl mb-4'>
+        Más de una década formando alumnos
+      </h2>
+      <p class='font-cuerpo text-grisTexto leading-relaxed mb-6'>
+        El Colegio Jean Piaget nació con el propósito de ofrecer una educación
+        cercana, donde cada alumno reciba la atención que necesita para
+        desarrollarse académica y personalmente.
+      </p>
+      <a
+        href='/quienes-somos'
+        class='group inline-flex items-center gap-2 font-titulo font-bold text-azul-marca hover:text-azul-500 transition-colors'
+      >
+        Conoce nuestra historia
+        <span
+          class='transition-transform duration-300 ease-out group-hover:translate-x-1'
+          >→</span
+        >
+      </a>
+    </div>
+  </div>
+</section>

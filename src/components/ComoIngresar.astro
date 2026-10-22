@@ -1,0 +1,71 @@
+---
+// Proceso de admisión en 4 pasos simples. En escritorio, conectados por
+// una línea horizontal; en móvil, apilados sin línea (se ve forzada en
+// pantallas angostas, y el número ya comunica el orden sin ella).
+const pasos = [
+  {
+    numero: 1,
+    titulo: 'Solicita informes',
+    texto: 'Contáctanos por teléfono, correo o el formulario de esta página.',
+  },
+  {
+    numero: 2,
+    titulo: 'Agenda una visita',
+    texto:
+      'Conoce las instalaciones y resuelve tus dudas con el equipo del colegio.',
+  },
+  {
+    numero: 3,
+    titulo: 'Entrega documentos',
+    texto:
+      'Te indicamos los documentos necesarios para el proceso de inscripción.',
+  },
+  {
+    numero: 4,
+    titulo: 'Confirma la inscripción',
+    texto: 'Completa el pago y tu lugar queda asegurado para el ciclo escolar.',
+  },
+];
+---
+
+<section class='bg-white py-20'>
+  <div class='max-w-5xl mx-auto px-6'>
+    <p
+      class='text-xs font-titulo font-bold tracking-widest text-azul-500 uppercase mb-2 text-center'
+    >
+      Admisiones
+    </p>
+    <h2 class='text-3xl md:text-4xl text-center mb-16'>Cómo ingresar</h2>
+
+    <div class='relative grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6'>
+      <div
+        class='hidden md:block absolute top-6 left-[12.5%] right-[12.5%] h-0.5 bg-linea'
+      >
+      </div>
+
+      {
+        pasos.map((paso, indice) => (
+          <div
+            class='reveal relative text-center'
+            style={`transition-delay: ${indice * 100}ms`}
+          >
+            <div class='relative z-10 w-12 h-12 mx-auto mb-4 rounded-full bg-azul-marca text-white font-titulo font-extrabold flex items-center justify-center'>
+              {paso.numero}
+            </div>
+            <h3 class='text-lg mb-1'>{paso.titulo}</h3>
+            <p class='font-cuerpo text-grisTexto text-sm'>{paso.texto}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class='text-center mt-16'>
+      <a
+        href='/contacto'
+        class='inline-block bg-amarillo-marca hover:bg-amarillo-hover text-azul-900 font-titulo font-bold px-8 py-3 rounded-full transition-colors duration-300'
+      >
+        Agenda tu visita
+      </a>
+    </div>
+  </div>
+</section>

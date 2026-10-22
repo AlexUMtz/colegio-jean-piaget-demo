@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EncabezadoPagina from '../components/EncabezadoPagina.astro';
+import Valores from '../components/Valores.astro';
+import Equipo from '../components/Equipo.astro';
+import InstalacionesCompletas from '../components/InstalacionesCompletas.astro';
+import encabezadoFoto from '../assets/images/encabezado-quienes-somos.jpg';
+---
+
+<Layout titulo='¿Quiénes somos?'>
+  <EncabezadoPagina
+    titulo='¿Quiénes somos?'
+    subtitulo='Conoce la historia, los valores y al equipo detrás del Colegio Jean Piaget.'
+    variante='foto'
+    imagen={encabezadoFoto}
+  />
+
+  <section class='bg-white py-20'>
+    <div class='max-w-3xl mx-auto px-6'>
+      <p
+        class='text-xs font-titulo font-bold tracking-widest text-azul-500 uppercase mb-2'
+      >
+        Nuestra historia
+      </p>
+      <h2 class='text-3xl md:text-4xl mb-6'>
+        Más de una década formando alumnos
+      </h2>
+      <p class='font-cuerpo text-grisTexto leading-relaxed mb-4'>
+        El Colegio Jean Piaget nació con el propósito de ofrecer una educación
+        cercana, donde cada alumno reciba la atención que necesita para
+        desarrollarse académica y personalmente. Desde nuestros inicios, hemos
+        crecido junto con las familias que depositan su confianza en nosotros,
+        adaptando nuestros programas a las necesidades de cada generación de
+        estudiantes.
+      </p>
+      <p class='font-cuerpo text-grisTexto leading-relaxed'>
+        Hoy contamos con instalaciones pensadas para el aprendizaje y la
+        convivencia, un equipo docente comprometido, y un método que acompaña a
+        cada niño desde preescolar hasta el último grado de primaria.
+      </p>
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section class='bg-azul-50 py-20'>
+    <div
+      class='max-w-4xl mx-auto px-6 grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-azul-200'
+    >
+      <div class='reveal md:pr-12 pb-10 md:pb-0'>
+        <p
+          class='text-xs font-titulo font-bold tracking-widest text-azul-500 uppercase mb-2'
+        >
+          Misión
+        </p>
+        <p class='font-cuerpo text-tinta leading-relaxed'>
+          Formar alumnos con bases académicas sólidas y valores humanos, en un
+          ambiente seguro que impulse su desarrollo integral desde preescolar
+          hasta el último grado de primaria.
+        </p>
+      </div>
+
+      <div
+        class='reveal md:pl-12 pt-10 md:pt-0'
+        style='transition-delay: 150ms'
+      >
+        <p
+          class='text-xs font-titulo font-bold tracking-widest text-azul-500 uppercase mb-2'
+        >
+          Visión
+        </p>
+        <p class='font-cuerpo text-tinta leading-relaxed'>
+          Ser una institución reconocida por la calidad de su formación
+          académica y humana, y por el compromiso de su comunidad educativa con
+          cada generación de alumnos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Valores />
+  <Equipo />
+  <InstalacionesCompletas />
+</Layout>

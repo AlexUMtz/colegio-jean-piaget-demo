@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import imgPreescolar from '../assets/images/niveles-preescolar.jpg';
+import imgPrimaria from '../assets/images/niveles-primaria.jpg';
+
+// Niveles educativos (Inicio): versión ligera, solo gancho hacia Oferta
+// educativa. Los detalles (destacados, horarios, materias) viven en esa
+// página, no aquí, para no duplicar contenido entre ambas.
+const niveles = [
+  {
+    nombre: 'Preescolar',
+    descripcion:
+      'Los primeros pasos en el aprendizaje, con juego y exploración guiada.',
+    href: '/oferta-educativa#preescolar',
+    imagen: imgPreescolar,
+  },
+  {
+    nombre: 'Primaria',
+    descripcion:
+      'De 1° a 6°, con un método que acompaña el desarrollo académico y personal.',
+    href: '/oferta-educativa#primaria',
+    imagen: imgPrimaria,
+  },
+];
+---
+
+<section class='bg-white py-20'>
+  <div class='max-w-5xl mx-auto px-6'>
+    <p
+      class='text-xs font-titulo font-bold tracking-widest text-azul-500 uppercase mb-2 text-center'
+    >
+      Oferta educativa
+    </p>
+    <h2 class='text-3xl md:text-4xl text-center mb-12'>
+      Niveles que ofrecemos
+    </h2>
+
+    <div class='grid sm:grid-cols-2 gap-8'>
+      {
+        niveles.map((nivel, indice) => (
+          <a
+            href={nivel.href}
+            class='reveal group relative block h-80 rounded-lg overflow-hidden bg-azul-200 shadow-sm hover:shadow-xl transition-shadow duration-500 ease-out'
+            style={`transition-delay: ${indice * 200}ms`}
+          >
+            <Image
+              src={nivel.imagen}
+              alt={`Alumnos de ${nivel.nombre}`}
+              class='absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105'
+            />
+
+            <div class='absolute inset-0 bg-gradient-to-t from-azul-900/90 via-azul-900/20 to-transparent' />
+
+            <div class='absolute inset-x-0 bottom-0 p-6'>
+              <h3 class='text-2xl text-white mb-1'>{nivel.nombre}</h3>
+              <span class='block w-10 h-1 bg-amarillo-marca mb-3 transition-all duration-500 ease-out group-hover:w-16' />
+              <p class='font-cuerpo text-azul-50 text-sm mb-3'>
+                {nivel.descripcion}
+              </p>
+              <span class='inline-flex items-center gap-2 font-titulo font-bold text-amarillo-marca text-sm'>
+                Conocer más
+                <span class='transition-transform duration-300 ease-out group-hover:translate-x-1'>
+                  →
+                </span>
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

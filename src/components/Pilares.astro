@@ -1,0 +1,77 @@
+---
+// Bloque de pilares/valores. Iconos como SVG de línea simple, sin
+// librería externa. El texto es [EJEMPLO] hasta tener los valores reales.
+const pilares = [
+  {
+    titulo: 'Excelencia académica',
+    texto: 'Programas diseñados para el desarrollo integral de cada alumno.',
+    icono:
+      'M12 6.25L3 10.5l9 4.25 9-4.25-9-4.25zM3 10.5v6M21 10.5v6M12 14.75v6',
+  },
+  {
+    titulo: 'Valores y comunidad',
+    texto: 'Formamos personas responsables, empáticas y comprometidas.',
+    icono:
+      'M12 21s-7-4.5-9.5-9C0.5 8 2 4 6 4c2 0 3.5 1.2 4 2 0.5-0.8 2-2 4-2 4 0 5.5 4 3.5 8-2.5 4.5-9.5 9-9.5 9z',
+  },
+  {
+    titulo: 'Instalaciones seguras',
+    texto: 'Espacios pensados y cuidados para el aprendizaje diario.',
+    icono: 'M4 10.5L12 4l8 6.5V20a1 1 0 01-1 1h-4v-6H9v6H5a1 1 0 01-1-1v-9.5z',
+  },
+  {
+    titulo: 'Actividades extracurriculares',
+    texto: 'Deporte, arte e idiomas que complementan la formación académica.',
+    icono:
+      'M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83',
+  },
+];
+---
+
+<section class='bg-azul-50 py-20'>
+  <div class='max-w-5xl mx-auto px-6 grid sm:grid-cols-2 gap-8'>
+    {
+      pilares.map((pilar, indice) => (
+        <div
+          class='reveal relative flex bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500 ease-out group'
+          style={`transition-delay: ${indice * 100}ms`}
+        >
+          <div
+            class:list={[
+              'w-24 md:w-28 shrink-0 flex items-center justify-center',
+              indice % 2 === 0 ? 'bg-azul-marca' : 'bg-azul-900',
+            ]}
+          >
+            <svg
+              class='w-9 h-9 text-white'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='1.25'
+              stroke-linecap='round'
+              stroke-linejoin='round'
+            >
+              <path d={pilar.icono} />
+            </svg>
+          </div>
+          <div class='relative p-7 md:p-8'>
+            <span
+              class='absolute -top-2 right-3 font-titulo font-extrabold text-6xl text-azul-50 select-none'
+              aria-hidden='true'
+            >
+              {String(indice + 1).padStart(2, '0')}
+            </span>
+            <p class='relative text-xs font-titulo font-bold tracking-widest text-azul-500 uppercase mb-2'>
+              Nuestros pilares
+            </p>
+            <h3 class='relative text-xl mb-1'>{pilar.titulo}</h3>
+            <span class='relative block w-10 h-1 bg-amarillo-marca mb-4 transition-all duration-500 ease-out group-hover:w-16' />
+            <p class='relative font-cuerpo text-grisTexto text-sm leading-relaxed'>
+              {pilar.texto}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,27 @@
+---
+// Franja de confianza: datos breves que dan credibilidad a simple vista.
+// Los números son [EJEMPLO]; se sustituyen cuando el director confirme los reales.
+const datos = [
+  { valor: '+15', etiqueta: 'años de experiencia' },
+  { valor: '2', etiqueta: 'niveles: preescolar y primaria' },
+  { valor: '25', etiqueta: 'alumnos por grupo' },
+  { valor: '100%', etiqueta: 'incorporación oficial' },
+];
+---
+
+<section class='bg-white py-14'>
+  <div
+    class='max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center'
+  >
+    {
+      datos.map((dato, indice) => (
+        <div class='reveal' style={`transition-delay: ${indice * 100}ms`}>
+          <p class='font-titulo font-extrabold text-3xl md:text-4xl text-azul-marca'>
+            {dato.valor}
+          </p>
+          <p class='font-cuerpo text-grisTexto text-sm mt-1'>{dato.etiqueta}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

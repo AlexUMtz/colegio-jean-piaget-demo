@@ -1,0 +1,45 @@
+/* Nunito (títulos) y Nunito Sans (cuerpo), alojadas en Google Fonts.
+   Solo pedimos los pesos que realmente usamos, para no cargar de más. */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos base del sitio. Con applyBaseStyles en false (astro.config.mjs)
+   controlamos esto nosotros en vez de heredar los defaults de Tailwind. */
+body {
+  @apply font-cuerpo text-tinta bg-white antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply font-titulo font-bold text-azul-marca;
+}
+
+/* Animación de aparición al hacer scroll:
+   oculto y desplazado hacia abajo por defecto, visible y en su lugar
+   cuando el JS le agrega "reveal-visible" al entrar en pantalla. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.55s ease-out,
+    transform 0.55s ease-out;
+}
+
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Si el usuario prefiere menos movimiento, se muestra todo de inmediato,
+   sin transición ni desplazamiento. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
