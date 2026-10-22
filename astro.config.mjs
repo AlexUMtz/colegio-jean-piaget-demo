@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 // compile sin errores (algunas funciones, como la URL canónica y el
 // sitemap, lo necesitan para construir URLs completas).
 export default defineConfig({
-  site: 'https://www.colegiojeanpiaget.edu.mx', // [EJEMPLO]
+  site: 'https://colegio-jean-piaget-demo-alex-mtz.vercel.app', // [EJEMPLO]
   integrations: [
     tailwind({
       // Usamos nuestro propio archivo de estilos globales en vez del
